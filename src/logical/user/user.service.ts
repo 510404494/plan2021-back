@@ -36,37 +36,6 @@ export class UserService {
     }
   }
 
-  async findAll(): Promise<any> {
-    const sql = `
-      SELECT
-        user_id id, account_name username, real_name realName, passwd password,
-        passwd_salt salt, mobile, role
-      FROM
-        admin_user
-    `;
-    try {
-      const user = (
-        await sequelize.query(sql, {
-          type: Sequelize.QueryTypes.SELECT, // 查询方式
-          raw: true, // 是否使用数组组装的方式展示结果
-          logging: true, // 是否将 SQL 语句打印到控制台
-        })
-      );
-      // 若查不到用户，则 user === undefined
-      //return user;
-      return {
-        code: 200,
-        data: {
-          user,
-          total: user.length,
-        },
-      };
-    } catch (error) {
-      console.error(error);
-      return void 0;
-    }
-  }
-
   /**
    * 注册
    * @param requestBody 请求体

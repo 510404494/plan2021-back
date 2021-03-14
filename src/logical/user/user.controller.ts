@@ -36,16 +36,10 @@ export class UserController {
     }
   }
 
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @UsePipes(new ValidationPipe())
   @Post('register')
   async register(@Body() body: RegisterInfoDTO) {
     return await this.usersService.register(body);
-  }
-
-  @UseGuards(AuthGuard('jwt'))
-  @Post('list')
-  async list() {
-    return await this.usersService.findAll();
   }
 }
